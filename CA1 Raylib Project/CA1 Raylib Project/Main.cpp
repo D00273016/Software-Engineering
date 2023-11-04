@@ -28,7 +28,9 @@ int main() {
 	//Set the width and the height, and title  of the screen 
 	const int screenWidth = 800;
 	const int screenHeight = 600;
+	const int levels = 5;
 	const char* title = "Floor is lava";
+
 
 	//Raylib build in function to initialise window by passing in variable
 	InitWindow(screenWidth, screenHeight, title);
@@ -42,6 +44,23 @@ int main() {
 		//This is where the main logic will be called (classes).
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
+		
+		//Adds Instructions text to scrren
+		DrawText("Hello Weclcome to Floor is lava", 250, 250, 20, BLACK);
+		DrawText("The aim of the game is escape the lava.", 220, 280, 20, BLACK);
+		DrawText("Character can move fruniture to jump from one place to another.", 50, 310, 20, BLACK);
+		DrawText(TextFormat("The game consists of %d levels",levels), 220, 340, 20, BLACK);
+
+		//Importing character
+		Texture2D characterTexture = LoadTexture("Resources/Denis.png");
+		Vector2 charPosition = { (float)screenWidth / 2,(float)screenHeight / 5 };
+		float charRotation = 0.00;
+		float charScale = {0.5f / 0.5f};
+		Color charColor = WHITE;
+	
+		//allows to draw texture and scale it.
+		DrawTextureEx(characterTexture, charPosition, charRotation, charScale, charColor);
+
 		EndDrawing();
 
 	};

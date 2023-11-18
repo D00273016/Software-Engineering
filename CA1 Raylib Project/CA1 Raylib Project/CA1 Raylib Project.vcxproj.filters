@@ -26,5 +26,13 @@
     <Image Include="Resources\Denis.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Play_button.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MenuScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

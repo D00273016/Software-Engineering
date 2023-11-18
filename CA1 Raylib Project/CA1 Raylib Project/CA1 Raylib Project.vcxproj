@@ -134,6 +134,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Denis.png" />
+    <Image Include="Resources\Play_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MenuScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

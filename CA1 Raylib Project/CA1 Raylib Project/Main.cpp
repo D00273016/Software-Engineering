@@ -27,15 +27,22 @@ Hint: Look to the examples https ://www.raylib.com/examples.html
 #define NUM_FRAMES  3  
 */
 
+enum Screen
+{
+	Menu,
+	Game
+};
+
 int main() {
 
 
 	//Set the width and the height, and title  of the screen 
 	const int screenWidth = 800;
 	const int screenHeight = 600;
-	const int levels = 5;
 	const char* title = "Floor is lava";
 	Vector2 mousePosition = { 0.0f, 0.0f };
+
+	Screen currentScreen = Menu;
 
 	//Raylib build in function to initialise window by passing in variable
 	InitWindow(screenWidth, screenHeight, title);
@@ -51,6 +58,7 @@ int main() {
 	float buttonScale = { 2.0f };
 	Color buttonColor = SKYBLUE;
 
+
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
 
@@ -63,18 +71,19 @@ int main() {
 		{
 			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 			{
-				buttonColor = PINK;
+				currentScreen = Game;
 			}
-			else
-			{
-				buttonColor = SKYBLUE;
-			}
+
 		}
 
 
 		// Draw ----------------------------------------------------------------------------------
 		BeginDrawing();
 
+		//Testing the button press action ideally this should be in another fuction
+
+		if (currentScreen == Menu) {
+			
 			ClearBackground(RAYWHITE);
 
 			//Adds Instructions text to scrren
@@ -85,7 +94,16 @@ int main() {
 
 			//allows to draw texture and scale it.
 			DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
-	
+		
+		}
+		else 
+		{
+			ClearBackground(RAYWHITE);
+
+		
+		}
+
+
 			EndDrawing();
 		 //-------------------------------------------------------------------------------------
 	};

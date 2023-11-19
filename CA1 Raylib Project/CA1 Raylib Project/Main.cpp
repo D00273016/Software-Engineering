@@ -1,6 +1,7 @@
 
 //Include raylib package in the package
 #include "raylib.h"
+#include "Character.h"
 
 
 //Opens a window
@@ -51,13 +52,16 @@ int main() {
 	SetTargetFPS(60);
 
 	Texture2D playButton = LoadTexture("resources/Play_button.png"); // Load button texture
-	
+
 	//Texture2D characterTexture = LoadTexture("Resources/Denis.png");
 	Vector2 buttonPosition = { (float)screenWidth / 2,(float)screenHeight / 2 };
 	float buttonRotation = 0.00;
 	float buttonScale = { 2.0f };
 	Color buttonColor = SKYBLUE;
 
+
+	//Creating instance of the character class
+	Character player(50, 100, 20, 20, PINK);
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -67,13 +71,19 @@ int main() {
 
 		mousePosition = GetMousePosition();
 
-		if (CheckCollisionPointRec(mousePosition, buttonBounds))
+		if (currentScreen == Menu)
 		{
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			if (CheckCollisionPointRec(mousePosition, buttonBounds))
 			{
-				currentScreen = Game;
+				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+				{
+					currentScreen = Game;
+				}
 			}
-
+		}
+		else
+		{
+			player.Update();
 		}
 
 
@@ -99,7 +109,7 @@ int main() {
 		else 
 		{
 			ClearBackground(RAYWHITE);
-
+			player.Draw();
 		
 		}
 

@@ -2,6 +2,7 @@
 //Include raylib package in the package
 #include "raylib.h"
 #include "Character.h"
+#include "Tile.h"
 
 
 //Opens a window
@@ -61,7 +62,12 @@ int main() {
 
 
 	//Creating instance of the character class
-	Character player(50, 100, 20, 20, PINK);
+	Character player(Vector2{50,100}, Vector2{20,20}, PINK);
+
+	//Createing instance of tile class, first green grass
+	Tile tile(Vector2{ 0,0 }, Vector2{ 100,100 }, Obstacle);
+	//Tile tile2(Vector2{ 0,0 }, Vector2{ 100,100 }, Obstacle);
+
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -83,7 +89,20 @@ int main() {
 		}
 		else
 		{
+			// Moves the player for now
 			player.Update();
+			//The next move is to check if there is a collition between a tile and a charter and if that returns true set the tile function is called.
+
+			if (tile.CheckForCollision(player.position, player.size)) {
+			
+				tile.SetTileType(Ice);
+			
+			}
+			else // created for test but should include enemy position check collision to turn orange.
+			{
+				tile.SetTileType(Fire);
+			}
+			
 		}
 
 
@@ -109,7 +128,10 @@ int main() {
 		else 
 		{
 			ClearBackground(RAYWHITE);
+			//Order matters determines what object is on top
+			tile.Draw();
 			player.Draw();
+
 		
 		}
 

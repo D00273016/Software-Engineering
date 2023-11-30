@@ -155,4 +155,5 @@ int main() {
 // Player Class inherits the character? Same applies
 // Bonus collectable class
 // SceneManagement of the game background, audio text, transition between scenes.
-
+// References 
+// For concept https://www.youtube.com/watch?v=DqKrZ7Zffxw

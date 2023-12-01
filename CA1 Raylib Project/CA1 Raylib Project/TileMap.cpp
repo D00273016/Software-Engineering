@@ -17,7 +17,73 @@ TileMap::TileMap(char* fileToLoad)
 void TileMap::LoadTileMap(char* fileToLoad)
 {
 
-	//once the tile map is read from the textile
+	Vector2 tileSize = { 1920 / mapSize.x,1080 / mapSize.y };
+
+
+	// Creating an integer array to store the tile config
+	// Change to 2d Array https://www.digitalocean.com/community/tutorials/two-dimensional-array-in-c-plus-plus
+
+	int map[20][20] = {
+		{0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,3,1,1,1,0},
+		{0,0,0,0,0,0,0,0,0,0,0,0,1,1,3,3,1,1,1,0},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,1,1,2,2,2,1,1,1,0,0,1,1,1,2,2,2,1,1,1},
+		{1,1,1,2,2,2,1,1,1,0,0,1,1,1,2,2,2,1,1,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,1,1},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,1,1},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1},
+		{1,0,0,0,0,0,0,0,0,3,3,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,3,3,1,1,1,1,1,1,1,0,0},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{0,0,0,0,0,0,0,2,2,2,3,3,3,3,1,1,0,0,1,2},
+		{0,0,0,0,0,0,0,2,2,2,3,3,3,3,1,1,0,0,1,2},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,1,1},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1},
+		{1,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1}
+	};
+
+
+	// Tile Map made up from grass water and 
+	// Grass = 1, Cement = 2, Ground, House = 4, Roof = 5, Water = 6
+	for (int x = 0; x < 20; x++) 
+	{
+		for (int y = 0; y < 20; y++) 
+		{
+			TileType tileType;
+			Vector2 position = { x * tileSize.x, y * tileSize.y };
+
+			if (map[x][y] == 0)
+			{
+				tileType = Grass;
+			}
+			else if (map[x][y] == 1)
+			{
+				tileType = Ice;
+			}
+			else if (map[x][y] == 2)
+			{
+				tileType = Fire;
+			}
+			else if (map[x][y] == 3)
+			{
+				tileType = Obstacle;
+			}
+
+
+			Tile tile(position, tileSize, tileType);
+
+			//Creating an individual tile that will be a added to the list
+			TileList.push_back(tile);
+		};
+	};
+
+	// Tile Map reference logic from https://github.com/raysan5/raylib-games/blob/master/cat_vs_roomba/src/screen_gameplay.c
+
+
 	// it will load in a the file
 	// output the file into an array.
 	// Create a loop to loop over the array with if statements to display the 
@@ -32,90 +98,8 @@ void TileMap::LoadTileMap(char* fileToLoad)
 	//2. Loop over x and y (two loops)
 	//3. Check x for 
 
-//	This will loop through x horizontal surface
-	Vector2 tileSize = { 800 / mapSize.x,600 / mapSize.y };
+	//Increaseing the tile map size
 
-	for (int x = 0; x < mapSize.x; x++) 
-	{	
-		for (int y = 0;y < mapSize.y; y++)
-		{
-			Vector2 position = {x * tileSize.x, y * tileSize.y };
-
-			TileType tileType;
-
-			if (x % 2 == 0)
-			{
-				tileType = Grass;
-			}
-			else
-			{
-				tileType = Obstacle;
-			}
-
-			Tile tile (position, tileSize, tileType);
-
-			//Creating an individual tile that will be a added to the list
-			TileList.push_back(tile);
-		}
-	}
-
-/*
-	std::ifstream file("Resources/TileConfigMap.txt");
-	std::string line;
-
-	int y = 100; // Starting y position for drawing
-	if (file.is_open()) {
-		while (getline(file, line)) {
-			std::cout << line << '\n';
-			DrawText("fgsrgdr", 10, y, 20, RED);
-			y += 30; // Adjust the vertical spacing as needed
-		}
-		//	file.close();
-	}
-	else {
-		std::cout << "Unable to open file";
-		DrawText("Unable to open file", 10, y, 20, RED);
-		std::cerr << "Error opening the file" << std::endl;
-	}
-	//allows to draw texture and scale it.
-
-*/
-
-	/*
-	if (file.is_open()) {
-		while (getline(file, line)) {
-			std::cout << line << '\n';
-		}
-		file.close();
-	}
-	else {
-		std::cout << "Unable to open file";
-	}
-
-
-	string line;
-	ifstream file("TileConfigMap");
-	if (file.is_open())
-	{
-		while (getline(file, line))
-		{
-			cout << line << '\n';
-		}
-		file.close();
-	}
-
-	else cout << "Unable to open file";
-
-	return 0;
-	
-	file.close();
-
-
-	*/
-
-
-	// Reference https://stackoverflow.com/questions/32381484/print-a-matrix-in-a-text-file/32381610
-	// https://cplusplus.com/doc/tutorial/files/
 }
 
 void TileMap::Draw() {
@@ -124,12 +108,15 @@ void TileMap::Draw() {
 	{
 		TileList.at(i).Draw();
 	}
+
+
 }
 
 void TileMap::Update(Character player) 
 {
 	for (int i = 0; i < TileList.size(); i++)
 	{
+		/*
 		if (TileList.at(i).CheckForCollision(player.position, Vector2{player.size,player.size}))
 		{
 			TileList.at(i).SetTileType(Ice);
@@ -138,5 +125,6 @@ void TileMap::Update(Character player)
 
 			TileList.at(i).SetTileType(Fire);
 		}
+		*/
 	}
 }

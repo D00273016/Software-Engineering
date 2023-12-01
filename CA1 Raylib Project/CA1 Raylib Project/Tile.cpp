@@ -26,6 +26,7 @@ void Tile::SetTileType(TileType type)
 	else if (tileType == Fire)
 	{
 		color = ORANGE;
+
 	}
 	else if (tileType == Ice)
 	{

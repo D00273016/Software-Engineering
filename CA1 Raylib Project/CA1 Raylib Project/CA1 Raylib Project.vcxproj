@@ -139,12 +139,16 @@
   <ItemGroup>
     <Image Include="Resources\Denis.png" />
     <Image Include="Resources\Play_button.png" />
+    <Image Include="Resources\Santa_Walk1.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\TileConfigMap.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

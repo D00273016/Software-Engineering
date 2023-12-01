@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "Character.h"
 
 // Set the constuctor
 Tile::Tile(Vector2 position, Vector2 size, TileType tileType)
@@ -9,7 +10,8 @@ Tile::Tile(Vector2 position, Vector2 size, TileType tileType)
 
 // Add in scope resolution operator to ensure the function is being derived from a specific class
 
-void Tile::Draw() {
+void Tile::Draw() 
+{
 	DrawRectangle(position.x, position.y, size.x, size.y, color);
 }
 
@@ -47,9 +49,4 @@ bool Tile::CheckForCollision(Vector2 charPos, Vector2 charSize)
 	bool result = CheckCollisionRecs(tileRec, charRec);
 
 	return result;
-}
-
-void Tile::Update() 
-{
-
 }

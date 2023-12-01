@@ -1,18 +1,23 @@
 #include "Character.h"
+#include "TileMap.h"
 	
 
-Character::Character(Vector2 position, Vector2 size, Color color)
-	:position(position), size(size), color(color)
+Character::Character(Vector2 position, float size, char* textureFile)
+	:position(position), size(size)
 {
+	texture = LoadTexture(textureFile); // Load button texture
 }
 
 //Code sourced from class 6
 void Character::Draw() {
 	//For now making the character a movign rectangle
-	DrawRectangle(position.x, position.y, size.x, size.y, color);
+	DrawTextureEx(texture, position,0,size,WHITE);
+
 }
 
 void Character::Update() {
+
+	//position.y = position.y - (texture.height / 2);
 
 	if (IsKeyDown(KEY_UP))
 	{
@@ -34,8 +39,8 @@ void Character::Update() {
 	// if Top left position is negative it sets it to 0
 	if (position.y < 0) position.y = 0;
 	// if Bottom left position is over the screen you take the character position - the height of the character
-	if (position.y > GetScreenHeight() - size.y) position.y = GetScreenHeight() - size.y;
+	if (position.y > GetScreenHeight() - (texture.height * size)) position.y = GetScreenHeight() - (texture.height * size);
 	// This ensures the character within the screen frame on the X axis. Same logic applies as for Y axis but on X axis and using widht
-	if (position.x < 0) position.x = 0;
-	if (position.x > GetScreenWidth() - size.y) position.y = GetScreenWidth() - size.y;
+	if (position.x < 0 - texture.width / 2) position.x = 0 - texture.width / 2;
+	if (position.x > GetScreenWidth() - (texture.width / 2 * size)) position.x = GetScreenWidth() - (texture.width / 2 * size);
 };

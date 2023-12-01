@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "Character.h"
 #include "Tile.h"
+#include "TileMap.h"
 
 
 //Opens a window
@@ -37,11 +38,11 @@ enum Screen
 
 int main() {
 
-
 	//Set the width and the height, and title  of the screen 
 	const int screenWidth = 800;
 	const int screenHeight = 600;
 	const char* title = "Floor is lava";
+
 	Vector2 mousePosition = { 0.0f, 0.0f };
 
 	Screen currentScreen = Menu;
@@ -60,14 +61,12 @@ int main() {
 	float buttonScale = { 2.0f };
 	Color buttonColor = SKYBLUE;
 
-
-	//Creating instance of the character class
-	Character player(Vector2{50,100}, Vector2{20,20}, PINK);
-
-	//Createing instance of tile class, first green grass
-	Tile tile(Vector2{ 0,0 }, Vector2{ 100,100 }, Obstacle);
-	//Tile tile2(Vector2{ 0,0 }, Vector2{ 100,100 }, Obstacle);
-
+	//Creating instance of the character
+	Character player(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
+	Character enemy
+	(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
+	
+	TileMap tileMap((char*)"Test");
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -91,17 +90,21 @@ int main() {
 		{
 			// Moves the player for now
 			player.Update();
+
+			tileMap.Update(player);
+
+
 			//The next move is to check if there is a collition between a tile and a charter and if that returns true set the tile function is called.
 
-			if (tile.CheckForCollision(player.position, player.size)) {
-			
-				tile.SetTileType(Ice);
-			
-			}
-			else // created for test but should include enemy position check collision to turn orange.
-			{
-				tile.SetTileType(Fire);
-			}
+			//if (tile.CheckForCollision(player.position, player.size)) {
+			//
+			//	tile.SetTileType(Ice);
+			//
+			//}
+			//else // created for test but should include enemy position check collision to turn orange.
+			//{
+			//	tile.SetTileType(Fire);
+			//}
 			
 		}
 
@@ -122,6 +125,7 @@ int main() {
 			DrawText("Press the Button to Start", 250, 250, 20, BLUE);
 
 			//allows to draw texture and scale it.
+			
 			DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
 		
 		}
@@ -129,7 +133,8 @@ int main() {
 		{
 			ClearBackground(RAYWHITE);
 			//Order matters determines what object is on top
-			tile.Draw();
+			tileMap.Draw();
+			//DrawTextureEx(santaPlayer, santaPosition, santaScale, santaScale, santaColor);
 			player.Draw();
 
 		

@@ -41,6 +41,9 @@
     <Image Include="Resources\Play_button.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Santa_Walk1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -55,5 +58,10 @@
     <ClInclude Include="TileMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\TileConfigMap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

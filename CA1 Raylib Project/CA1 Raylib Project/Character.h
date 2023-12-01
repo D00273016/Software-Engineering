@@ -4,16 +4,17 @@
 class Character
 {
 	//Specifying the postion and the hight and width of the charater
+public: 
+	Vector2 position;
+	float size;
+
 private:
 
-	Color color;
+	Texture2D texture;
 
 public:
-	Vector2 position;
-	Vector2 size;
-
-	Character(Vector2 position, Vector2 size, Color color);
-
+	Character(Vector2 position, float size, char* textureFile);
+	
 	//Code sourced from class 6
 	void Draw();
 

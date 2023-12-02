@@ -11,6 +11,7 @@ public:
 
 	// This will read in the tile map from the file.
 private:
+
 	Vector2 mapSize;
 	Texture2D ice;
 	Texture2D grass;
@@ -28,11 +29,10 @@ private:
 
 
 public:
-	char* fileToLoad;
 
-	TileMap(char* fileToLoad);
+	TileMap();
 	
-	void LoadTileMap(char* fileToLoad);
+	void LoadTileMap();
 	void LoadTextures();
 	void Draw();
 	void Update(Character player);

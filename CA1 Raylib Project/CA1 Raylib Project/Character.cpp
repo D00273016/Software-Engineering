@@ -7,34 +7,48 @@ Character::Character(Vector2 position, float size, char* textureFile)
 {
 	texture = LoadTexture(textureFile); // Load button texture
 	speed = 5.0f;
+	//Resizing the texture works when set here rather than calculations in the source rec.
+	texture.width = texture.width * size;
+	texture.height = texture.height * size;
+	sourceRec = { position.x, position.y, (float)(texture.width) / 12   , (float)texture.height };
+	// to get the middle of the feet it has a the collision check for chaning tiles. 
+	// Issues with texture height size due to spacing in the png resulted in 1.18f figure for height. 
+	// The 
+	offset = { (texture.width) / 24.0f, (texture.height) / 1.18f };
+	/*
+	frame = 0;
+	updateTime = 1.0 / 12.0;
+	runningTime = 0.0;
 
-   // to get the middle of the feet it has a the collision check for chaning tiles. 
-   // Issues with texture height size due to spacing in the png resulted in 1.18f figure for height. 
-   // The 
-	offset = { (texture.width * size) / 2, (texture.height * size) / 1.18f };
-
+	*/
 }
 
 //Code sourced from class 6
 void Character::Draw() {
 	//For now making the character a movign rectangle
-	DrawTextureEx(texture, position,0,size,WHITE);
+    //DrawTextureEx(texture, position,0,size,WHITE);
+	DrawTextureRec(texture, sourceRec, position, WHITE);
+
 	// To visualise collision position the circle is drawn
 	DrawCircle(positionFeet.x, positionFeet.y, 3, PINK);
 
 }
+
 
 void Character::Update() {
 
 	//The feet positions are calculated by top left hand side char position
 	//by adding the calculated x offset (scaled char width / 2 to get the centre point), the same logic applies for y but vertical.
 
+	// Sets up time in between each frame
+		
 	positionFeet.x = position.x + offset.x;
 	positionFeet.y = position.y + offset.y;
 
 	if (IsKeyDown(KEY_UP))
 	{
 		position.y -= speed;
+			
 	}
 	if (IsKeyDown(KEY_DOWN))
 	{

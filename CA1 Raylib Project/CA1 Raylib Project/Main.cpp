@@ -40,12 +40,11 @@ enum Screen
 int main() {
 
 	//Set the width and the height, and title  of the screen 
-	const int screenWidth = 1750;
-	const int screenHeight = 1000;
+	const int screenWidth = 1920;
+	const int screenHeight = 1080;
 	const char* title = "Floor is lava";
 
 	Vector2 mousePosition = { 0.0f, 0.0f };
-
 	Screen currentScreen = Menu;
 
 	//Raylib build in function to initialise window by passing in variable
@@ -63,12 +62,10 @@ int main() {
 	Color buttonColor = SKYBLUE;
 
 	//Creating instance of the character
-	Character player(Vector2{ 0,0 }, 0.1, (char*)"Resources/Ice_Golem_Running_001.png"); //This is the character
-	(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
+	Character player(Vector2{0,0}, 0.1, (char*)"Resources/Ice_Golem_Run.png"); //This is the character
 	
-	TileMap tileMap((char*)"Test");
+	TileMap tileMap{};
 
-	
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -89,7 +86,7 @@ int main() {
 			}
 		}
 		else
-		{
+		{	
 			// Moves the player for now
 			player.Update();
 
@@ -136,7 +133,7 @@ int main() {
 			ClearBackground(RAYWHITE);
 			//Order matters determines what object is on top
 			tileMap.Draw();
-			//DrawTextureEx(santaPlayer, santaPosition, santaScale, santaScale, santaColor);
+		
 			player.Draw();
 
 		

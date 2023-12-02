@@ -137,6 +137,12 @@
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\castleGate.png" />
+    <Image Include="Resources\castleRoof.png" />
+    <Image Include="Resources\castleStairsLeft.png" />
+    <Image Include="Resources\castleStairsRight.png" />
+    <Image Include="Resources\castleTile.png" />
+    <Image Include="Resources\castleWindow.png" />
     <Image Include="Resources\Denis.png" />
     <Image Include="Resources\Play_button.png" />
     <Image Include="Resources\Santa_Walk1.png" />

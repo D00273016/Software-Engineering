@@ -62,6 +62,24 @@
     <Image Include="Resources\tileWood.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\castleGate.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\castleRoof.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\castleStairsLeft.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\castleStairsRight.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\castleTile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\castleWindow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">

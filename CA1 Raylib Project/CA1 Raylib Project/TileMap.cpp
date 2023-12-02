@@ -18,7 +18,7 @@ TileMap::TileMap(char* fileToLoad)
 void TileMap::LoadTileMap(char* fileToLoad)
 {
 
-	Vector2 tileSize = { 800 / mapSize.x,600/ mapSize.y };
+	Vector2 tileSize = { 1590 / mapSize.x,980/ mapSize.y };
 
 
 	// Creating an integer array to store the tile config
@@ -39,10 +39,10 @@ void TileMap::LoadTileMap(char* fileToLoad)
 		{3,0,0,0,0,0,0,0,0,3,3,1,1,1,1,1,1,1,0,3},
 		{3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,3},
 		{3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3},
-		{3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3},
-		{3,0,0,0,0,0,0,2,2,2,3,3,3,3,1,1,0,0,1,3},
-		{3,0,0,0,0,0,0,2,2,2,3,3,3,3,1,1,0,0,1,3},
-		{3,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,1,3},
+		{3,1,1,1,1,1,1,1,1,1,1,1,1,1,8,6,7,1,1,3},
+		{3,0,0,0,0,0,0,2,2,2,3,3,3,0,5,5,5,0,1,3},
+		{3,0,0,0,0,0,0,2,2,2,3,3,3,3,5,9,5,0,1,3},
+		{3,2,2,2,2,2,2,2,2,1,1,1,1,2,9,4,9,2,1,3},
 		{3,2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,3},
 		{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}
 	};
@@ -58,26 +58,62 @@ void TileMap::LoadTileMap(char* fileToLoad)
 			Texture2D texture;
 			Vector2 position = { x * tileSize.x, y * tileSize.y };
 
-			if (map[x][y] == 0)
+			if (map[y][x] == 0)
 			{
 				tileType = Grass;
 				texture = grass;
 			}
-			else if (map[x][y] == 1)
+			else if (map[y][x] == 1)
 			{
 				tileType = Ice;
 				texture = ice;
 			}
-			else if (map[x][y] == 2)
+			else if (map[y][x] == 2)
 			{
 				tileType = Ground;
 				texture = ground;
 			}
-			else if (map[x][y] == 3)
+			else if (map[y][x] == 3)
 			{
 				tileType = Water;
 				texture = water;
 			}
+			else if (map[y][x] == 4)
+			{
+				tileType = CastleGate;
+				texture = castleGate;
+				
+			}
+			else if (map[y][x] == 5)
+			{
+				tileType = CastleWindow;
+				texture = castleWindow;
+			}
+			else if (map[y][x] == 6)
+			{
+				tileType = CastleRoof;
+				texture = castleRoof;
+
+			}
+			else if (map[y][x] == 7)
+			{
+				tileType = CastleStairsRight;
+				texture = castleStairsRight;
+
+			}
+			else if (map[y][x] == 8)
+			{
+				tileType = CastleStairsLeft;
+				texture = castleStairsLeft;
+
+			}
+			else if (map[y][x] == 9)
+			{
+				tileType = CastleTile;
+				texture = castleTile;
+
+			}
+
 	
 
 			Tile tile(position, tileSize, tileType, texture);
@@ -114,8 +150,12 @@ void TileMap::LoadTextures() {
 	water = LoadTexture("resources/tileWater_1.png");
 	ground = LoadTexture("resources/tileWood.png");
 	ice = LoadTexture("resources/tileSnow_slope.png");
-
-
+	castleGate = LoadTexture("resources/castleGate.png");
+	castleWindow = LoadTexture("resources/castleWindow.png");
+	castleRoof = LoadTexture("resources/castleRoof.png");
+	castleTile = LoadTexture("resources/castleTile.png");
+	castleStairsLeft = LoadTexture("resources/castleStairsLeft.png");
+	castleStairsRight = LoadTexture("resources/castleStairsRight.png");
 }
 
 void TileMap::Draw() {

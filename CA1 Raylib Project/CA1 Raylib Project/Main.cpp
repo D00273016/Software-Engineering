@@ -40,8 +40,8 @@ enum Screen
 int main() {
 
 	//Set the width and the height, and title  of the screen 
-	const int screenWidth = 800;
-	const int screenHeight = 600;
+	const int screenWidth = 1750;
+	const int screenHeight = 1000;
 	const char* title = "Floor is lava";
 
 	Vector2 mousePosition = { 0.0f, 0.0f };

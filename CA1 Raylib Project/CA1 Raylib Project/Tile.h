@@ -7,7 +7,13 @@ enum TileType {
 	Fire,
 	Ice,
 	Water,
-	Ground
+	Ground,
+	CastleGate,
+	CastleWindow,
+	CastleRoof,
+	CastleTile,
+	CastleStairsLeft,
+	CastleStairsRight
 };
 
 class Tile

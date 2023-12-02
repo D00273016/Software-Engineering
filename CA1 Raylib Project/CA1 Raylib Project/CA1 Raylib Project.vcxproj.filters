@@ -35,13 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Denis.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Play_button.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Santa_Walk1.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\tileGrass.png">
@@ -78,6 +72,48 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\castleWindow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Fire_Golem_Run.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Run.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_000.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_001.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_002.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_003.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_004.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_005.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_006.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_007.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_008.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_009.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_010.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Ice_Golem_Running_011.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

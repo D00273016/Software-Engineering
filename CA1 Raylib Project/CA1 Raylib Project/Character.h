@@ -4,8 +4,13 @@
 class Character
 {
 	//Specifying the postion and the hight and width of the charater
+	//To fix the collision the feet position and offset was required, speed was added to remove hardcoding
 public: 
 	Vector2 position;
+	Vector2 positionFeet;
+	// Distance between the top left position and character feet.
+	Vector2 offset; 
+	float speed;
 	float size;
 
 private:

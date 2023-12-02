@@ -24,14 +24,17 @@ void Tile::SetTileType(TileType type,Texture2D tileTexture)
 
 // There will be more obstacles that will have to go through the loop 
 
-bool Tile::CheckForCollision(Vector2 charPos, Vector2 charSize)
+//previously checking for a collision between rectangles as the character was a rectangle
+//instead of using the collision of each of all sides the character point at his feet being checked with the built in function
+
+bool Tile::CheckForCollision(Vector2 charPos)
 {
-	// First rectangle tile and second is the player / enemy
+	// First rectangle tile and second is the player / player2
 	Rectangle tileRec{ position.x, position.y, size.x, size.y };
-	Rectangle charRec{ charPos.x, charPos.y, charSize.x, charSize.y };
+	
 
 	//built in function that will check for collision and return boolean
-	bool result = CheckCollisionRecs(tileRec, charRec);
+	bool result = CheckCollisionPointRec(charPos, tileRec);
 
 	return result;
 }

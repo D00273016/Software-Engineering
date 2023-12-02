@@ -63,7 +63,7 @@ int main() {
 	Color buttonColor = SKYBLUE;
 
 	//Creating instance of the character
-	Character player(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
+	Character player(Vector2{ 0,0 }, 0.1, (char*)"Resources/Ice_Golem_Running_001.png"); //This is the character
 	(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
 	
 	TileMap tileMap((char*)"Test");

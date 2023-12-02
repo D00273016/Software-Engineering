@@ -140,9 +140,16 @@
     <Image Include="Resources\Denis.png" />
     <Image Include="Resources\Play_button.png" />
     <Image Include="Resources\Santa_Walk1.png" />
+    <Image Include="Resources\tileGrass.png" />
+    <Image Include="Resources\tileGrass_bottom.png" />
+    <Image Include="Resources\tileSnow_slope.png" />
+    <Image Include="Resources\tileStone.png" />
+    <Image Include="Resources\tileWater_1.png" />
+    <Image Include="Resources\tileWood.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />

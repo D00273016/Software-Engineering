@@ -6,7 +6,8 @@ enum TileType {
 	Grass,
 	Fire,
 	Ice,
-	Obstacle
+	Water,
+	Ground
 };
 
 class Tile
@@ -14,17 +15,18 @@ class Tile
 	private:
 		Vector2 position;
 		Vector2 size;
-		Color color;
+		Texture2D texture;
 		TileType tileType;
 
 
 	//Declare the constructor
 	public:
-		Tile(Vector2 position, Vector2 size, TileType tileType);
+		Tile(Vector2 position, Vector2 size, TileType tileType, Texture2D texture);
+
 		// Void when you are not returning anything.
 		void Draw();
 
-		void SetTileType(TileType tileType);
+		void SetTileType(TileType tileType,Texture2D texture);
 
 		// this function will check if the player or enemy collides with the tile
 		bool CheckForCollision(Vector2 position,Vector2 size);

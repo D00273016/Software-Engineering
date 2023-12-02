@@ -44,6 +44,24 @@
     <Image Include="Resources\Santa_Walk1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\tileGrass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\tileGrass_bottom.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\tileSnow_slope.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\tileStone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\tileWater_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\tileWood.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h">
@@ -56,6 +74,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

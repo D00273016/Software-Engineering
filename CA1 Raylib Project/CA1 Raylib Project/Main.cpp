@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Tile.h"
 #include "TileMap.h"
+#include "Main.h"
 
 
 //Opens a window
@@ -39,8 +40,8 @@ enum Screen
 int main() {
 
 	//Set the width and the height, and title  of the screen 
-	const int screenWidth = 1920;
-	const int screenHeight = 1080;
+	const int screenWidth = 800;
+	const int screenHeight = 600;
 	const char* title = "Floor is lava";
 
 	Vector2 mousePosition = { 0.0f, 0.0f };
@@ -63,10 +64,11 @@ int main() {
 
 	//Creating instance of the character
 	Character player(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
-	Character enemy
 	(Vector2{ 0,0 }, 0.1, (char*)"Resources/Santa_Walk1.png"); //This is the character
 	
 	TileMap tileMap((char*)"Test");
+
+	
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -119,10 +121,10 @@ int main() {
 			ClearBackground(RAYWHITE);
 
 			//Adds Instructions text to scrren
-			DrawText("Hello Welcome to Floor is lava", 200, 100, 20, BLACK);
-			DrawText("The aim of the game is put out lava by moving the character.", 100, 150, 20, BLACK);
-			DrawText("Please select the difficulty level .", 200, 200, 20, BLACK);
-			DrawText("Press the Button to Start", 250, 250, 20, BLUE);
+			DrawText("Hello Welcome to Floor is lava", screenWidth/2-100, screenHeight/2-300, 20, BLACK);
+			DrawText("The aim of the game is put out lava by moving the character.",  screenWidth/2+50, screenHeight/2+50, 20, BLACK);
+			DrawText("Please select the difficulty level .", screenWidth / 2 + 100, screenHeight / 2 + 100, 20, BLACK);
+			DrawText("Press the Button to Start", screenWidth / 2 + 150, screenHeight / 2 + 150, 20, BLUE);
 
 			//allows to draw texture and scale it.
 			

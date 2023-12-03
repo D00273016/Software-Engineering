@@ -6,7 +6,7 @@ Character::Character(Vector2 position, float size, char* textureFile)
 	:position(position), size(size)
 {
 	texture = LoadTexture(textureFile); // Load button texture
-	speed = 5.0f;
+	speed = 300.0f;
 	//Resizing the texture works when set here rather than calculations in the source rec.
 	texture.width = texture.width * size;
 	texture.height = texture.height * size;
@@ -24,7 +24,8 @@ Character::Character(Vector2 position, float size, char* textureFile)
 }
 
 //Code sourced from class 6
-void Character::Draw() {
+void Character::Draw() 
+{
 	//For now making the character a movign rectangle
     //DrawTextureEx(texture, position,0,size,WHITE);
 	DrawTextureRec(texture, sourceRec, position, WHITE);
@@ -35,12 +36,13 @@ void Character::Draw() {
 }
 
 
-void Character::Update() {
+void Character::Update() 
+{
 
 	//The feet positions are calculated by top left hand side char position
 	//by adding the calculated x offset (scaled char width / 2 to get the centre point), the same logic applies for y but vertical.
 
-	// Sets up time in between each frame
+	// Sets up time in between each frame, Code refernced from Lecture 5 Animation
 	deltatime = GetFrameTime();
 
 	positionFeet.x = position.x + offset.x;
@@ -51,36 +53,88 @@ void Character::Update() {
 		position.y -= speed * deltatime;
 		runningTime += deltatime;
 		
-		if (runningTime >= updateTime) {
-			
+		if (runningTime >= updateTime) 
+		{
 			runningTime = 0.0;
 			sourceRec.x = frame * sourceRec.width;
 			frame++;
-			
-			if (frame > 11) {
+
+			if (frame > 11) 
+			{
 				frame = 0;
 			}
-		}
-
-			
+		}	
 	}
-	if (IsKeyReleased(KEY_UP)) {
-
+	if (IsKeyReleased(KEY_UP)) 
+	{
 		frame = 0;
 		sourceRec.x = frame * sourceRec.width;
-
 	}
 	if (IsKeyDown(KEY_DOWN))
 	{
-		position.y += speed;
+		position.y += speed * deltatime;
+		runningTime += deltatime;
+
+		if (runningTime >= updateTime) 
+		{
+			runningTime = 0.0;
+			sourceRec.x = frame * sourceRec.width;
+			frame++;
+
+			if (frame > 11) 
+			{
+				frame = 0;
+			}
+		}
+	}
+	if (IsKeyReleased(KEY_DOWN)) 
+	{
+		frame = 0;
+		sourceRec.x = frame * sourceRec.width;
 	}
 	if (IsKeyDown(KEY_LEFT))
 	{
-		position.x -= speed;
+		position.x -= speed * deltatime;
+		runningTime += deltatime;
+
+		if (runningTime >= updateTime)
+		{
+			runningTime = 0.0;
+			sourceRec.x = frame * sourceRec.width;
+			frame++;
+
+			if (frame > 11)
+			{
+				frame = 0;
+			}
+		}
+	}
+	if (IsKeyReleased(KEY_LEFT))
+	{
+		frame = 0;
+		sourceRec.x = frame * sourceRec.width;
 	}
 	if (IsKeyDown(KEY_RIGHT))
 	{
-		position.x += speed;
+		position.x += speed * deltatime;
+		runningTime += deltatime;
+
+		if (runningTime >= updateTime)
+		{
+			runningTime = 0.0;
+			sourceRec.x = frame * sourceRec.width;
+			frame++;
+
+			if (frame > 11)
+			{
+				frame = 0;
+			}
+		}
+	}
+	if (IsKeyReleased(KEY_RIGHT))
+	{
+		frame = 0;
+		sourceRec.x = frame * sourceRec.width;
 	}
 
 	int gamepad = 0; // which gamepad, reference code: https://www.raylib.com/examples/core/loader.html?name=core_input_gamepad

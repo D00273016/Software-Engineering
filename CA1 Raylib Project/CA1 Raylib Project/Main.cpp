@@ -113,7 +113,8 @@ int main() {
 
 		//Testing the button press action ideally this should be in another fuction
 
-		if (currentScreen == Menu) {
+		if (currentScreen == Menu) 
+		{
 			
 			ClearBackground(RAYWHITE);
 
@@ -124,7 +125,6 @@ int main() {
 			DrawText("Press the Button to Start", screenWidth / 2 + 150, screenHeight / 2 + 150, 20, BLUE);
 
 			//allows to draw texture and scale it.
-			
 			DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
 		
 		}
@@ -133,10 +133,7 @@ int main() {
 			ClearBackground(RAYWHITE);
 			//Order matters determines what object is on top
 			tileMap.Draw();
-		
 			player.Draw();
-
-		
 		}
 
 

@@ -91,7 +91,7 @@ int main() {
 			player1.Update();
 			player2.Update();
 
-			tileMap.Update(player1);
+			tileMap.Update(player1.positionFeet,player2.positionFeet);
 
 
 			//The next move is to check if there is a collition between a tile and a charter and if that returns true set the tile function is called.

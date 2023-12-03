@@ -13,6 +13,8 @@ TileMap::TileMap()
 	mapSize = { 30,30 };
 	LoadTextures();
 	LoadTileMap();
+	totalIce = 0;
+	totalFire = 0;
 }
 
 void TileMap::LoadTileMap()
@@ -161,6 +163,7 @@ void TileMap::LoadTextures() {
 	water = LoadTexture("resources/tileWater_1.png");
 	ground = LoadTexture("resources/tileWood.png");
 	ice = LoadTexture("resources/tileSnow_slope.png");
+	fire = LoadTexture("resources/tileLava.png");
 	castleGate = LoadTexture("resources/castleGate.png");
 	castleWindow = LoadTexture("resources/castleWindow.png");
 	castleRoof = LoadTexture("resources/castleRoof.png");
@@ -178,15 +181,31 @@ void TileMap::Draw() {
 
 
 }
-
-void TileMap::Update(Character player) 
+// Updating players positions
+void TileMap::Update(Vector2 player1Position, Vector2 player2Position)
 {
+	totalIce = 0;
+	totalFire = 0;
+	// Keeping track of the score and tile types for collision
 	for (int i = 0; i < TileList.size(); i++)
 	{
-		
-		if (TileList.at(i).CheckForCollision(player.positionFeet))
+		if (TileList.at(i).tileType == Ice)
+		{
+			totalIce++;
+		}
+		else if (TileList.at(i).tileType == Fire)
+		{
+			totalFire++;
+		}
+
+		if (TileList.at(i).CheckForCollision(player1Position))
 		{
 			TileList.at(i).SetTileType(Ice,ice);
+		}
+
+		if (TileList.at(i).CheckForCollision(player2Position))
+		{
+			TileList.at(i).SetTileType(Fire, fire);
 		}
 		//else {
 

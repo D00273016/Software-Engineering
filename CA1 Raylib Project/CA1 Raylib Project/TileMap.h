@@ -8,6 +8,9 @@ class TileMap
 {
 public:
 	std::vector<Tile> TileList;
+	//Keeping track of score
+	int totalIce;
+	int totalFire;
 
 	// This will read in the tile map from the file.
 private:
@@ -35,7 +38,8 @@ public:
 	void LoadTileMap();
 	void LoadTextures();
 	void Draw();
-	void Update(Character player);
+	//Player 1 & Player 2 position
+	void Update(Vector2 player1Position,Vector2 player2Position);
 
 
 };

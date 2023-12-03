@@ -1,27 +1,31 @@
 #pragma once
 #include <raylib.h>
+#include "Menu.h"
 
-class MainMenu
+// The MainMenu(child) inherits menu
+class MainMenu : Menu
 {
-	//Setting variables
-	private:
-		Texture2D playButton;
-		Vector2 buttonPosition;
-		float buttonRotation;
-		float buttonScale;
-		Color buttonColor;
-		Vector2 mousePosition;
-
 	public:
-		//Default consturcure
+
+		struct StartButton {
+			Texture2D playButton;
+			Vector2 buttonPosition;
+			float buttonRotation;
+			float buttonScale;
+			Color buttonColor;
+			Vector2 mousePosition;
+		};
+
+
 		MainMenu();
-		// Overloaded constructor
-		MainMenu(Texture2D playButton, Vector2 buttonPosition, float buttonRotation, float buttonScale, Color buttonColor, Vector2 mousePosition);
-		//declaring functions
+		// Overloaded constructor is passing in font for the menu and a struct
+		MainMenu(Font iceFont, StartButton startButton);
+		
 		void Draw();
+		bool StartGame(Vector2 mousePosition, Rectangle buttonBounds);
 
-		void Update();
-
-	protected:
+private:
+		// Tidying up code
+		StartButton startButton;
 };
 

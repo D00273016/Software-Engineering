@@ -15,10 +15,8 @@ public:
 	float size;
 	float deltatime;
 	int playerNumber;
-	//I NEED TO MOVE THIS INTO A STRUCt
-	/*
-	Rectangle animRec;
-	Vector2 animposition;*/
+	
+
 	int frame;         //current frame rate
 	float updateTime;  //calls through diff frames
 	float runningTime; //how much time was used since the last frame
@@ -32,7 +30,6 @@ public:
 	// adding player number for multiple players
 	Character(Vector2 position, float size, char* textureFile,int playerNumber);
 	
-	//Code sourced from class 6
 	void Draw();
 
 	void Animate();

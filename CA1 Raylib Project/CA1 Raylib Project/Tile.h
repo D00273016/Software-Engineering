@@ -8,12 +8,9 @@ enum TileType {
 	Ice,
 	Water,
 	Ground,
-	CastleGate,
-	CastleWindow,
-	CastleRoof,
-	CastleTile,
-	CastleStairsLeft,
-	CastleStairsRight
+	BottomGrass,
+	Sand
+
 };
 
 class Tile
@@ -22,7 +19,6 @@ class Tile
 		Vector2 position;
 		Vector2 size;
 		Texture2D texture;
-
 
 	//Declare the constructor
 	public:

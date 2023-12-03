@@ -37,32 +37,31 @@ void TileMap::LoadTileMap()
         {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,2,2,2,2,2,0,2,2,0,2,2,3,3},
         {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,3,3},
         {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,3,3},
-        {3,3,0,0,0,0,0,0,0,3,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
-        {3,3,0,0,0,0,0,0,0,3,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,0,0,0,0,0,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,0,0,0,0,0,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
         {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
         {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
-        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,7,0,0,7,0,0,7,0,3,3},
-        {3,3,0,0,0,0,0,2,2,2,0,2,2,2,3,3,3,0,5,5,5,0,0,5,0,0,5,0,3,3},
-        {3,3,0,0,0,0,0,2,2,2,0,2,2,2,3,3,3,3,5,9,5,0,0,5,0,0,5,0,3,3},
-        {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,2,9,4,9,2,0,9,2,0,9,2,3,3},
+        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,5,0,3,3},
+        {3,3,0,0,0,0,0,2,2,2,0,2,2,2,2,2,2,0,5,5,5,0,0,0,0,0,5,0,3,3},
+        {3,3,0,0,0,0,0,2,2,2,0,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,5,0,3,3},
+        {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,2,2,2,2,2,0,0,2,0,5,2,3,3},
         {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,3,3},
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
-        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,3,3},
         {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
-        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
         {3,3,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,3,3},
         {3,3,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,3,3},
         {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,2,2,0,2,2,3,3},
         {3,3,2,2,2,2,2,2,2,0,2,2,2,0,0,0,0,2,2,2,2,2,0,2,2,0,2,2,3,3},
-        {3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,3,3},
+        {3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3},
 		{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}
 
 	};
 
 
-	// Tile Map made up from grass water and 
-	// Grass = 1, Cement = 2, Ground, House = 4, Roof = 5, Water = 6
+//Loops over the array above and sets the tiles 
 	for (int x = 0; x < mapSize.x; x++) 
 	{
 		for (int y = 0; y < mapSize.y; y++)
@@ -93,67 +92,25 @@ void TileMap::LoadTileMap()
 			}
 			else if (map[y][x] == 4)
 			{
-				tileType = CastleGate;
-				texture = castleGate;
+				tileType = BottomGrass;
+				texture = bottomGrass;
 				
 			}
 			else if (map[y][x] == 5)
 			{
-				tileType = CastleWindow;
-				texture = castleWindow;
-			}
-			else if (map[y][x] == 6)
-			{
-				tileType = CastleRoof;
-				texture = castleRoof;
-
-			}
-			else if (map[y][x] == 7)
-			{
-				tileType = CastleStairsRight;
-				texture = castleStairsRight;
-
-			}
-			else if (map[y][x] == 8)
-			{
-				tileType = CastleStairsLeft;
-				texture = castleStairsLeft;
-
-			}
-			else if (map[y][x] == 9)
-			{
-				tileType = CastleTile;
-				texture = castleTile;
-
+				tileType = Sand;
+				texture = sand;
 			}
 
-	
 
 			Tile tile(position, tileSize, tileType, texture);
 
-			//Creating an individual tile that will be a added to the list
+			//keeps track of the tiles in the array list
 			TileList.push_back(tile);
 		};
 	};
 
 	// Tile Map reference logic from https://github.com/raysan5/raylib-games/blob/master/cat_vs_roomba/src/screen_gameplay.c
-
-
-	// it will load in a the file
-	// output the file into an array.
-	// Create a loop to loop over the array with if statements to display the 
-	// In the SetTileType it will display this one the screen  
-
-	//Createing instance of tile class, first green grass
-	//Position , size
-	//Tile tile(Vector2{ 0,0 }, Vector2{ 50,50 }, Obstacle);
-	//Tile tile2(Vector2{ 0,0 }, Vector2{ 100,100 }, Obstacle);
-
-	//1. Get screensize
-	//2. Loop over x and y (two loops)
-	//3. Check x for 
-
-	//Increaseing the tile map size
 
 }
 
@@ -164,14 +121,12 @@ void TileMap::LoadTextures() {
 	ground = LoadTexture("resources/tileWood.png");
 	ice = LoadTexture("resources/tileSnow_slope.png");
 	fire = LoadTexture("resources/tileLava.png");
-	castleGate = LoadTexture("resources/castleGate.png");
-	castleWindow = LoadTexture("resources/castleWindow.png");
-	castleRoof = LoadTexture("resources/castleRoof.png");
-	castleTile = LoadTexture("resources/castleTile.png");
-	castleStairsLeft = LoadTexture("resources/castleStairsLeft.png");
-	castleStairsRight = LoadTexture("resources/castleStairsRight.png");
-}
+	bottomGrass = LoadTexture("resources/tileGrass_bottom.png");
+	sand = LoadTexture("resources/tileDirt_slope.png");
 
+
+}
+//Loops over the array list and draws the tiles
 void TileMap::Draw() {
 
 	for (int i = 0; i < TileList.size(); i++)
@@ -179,9 +134,9 @@ void TileMap::Draw() {
 		TileList.at(i).Draw();
 	}
 
-
 }
-// Updating players positions
+// Loops over all tiles, checks for collisions and changes tile type based on the player.
+// Keep track of total ice and fire for player score
 void TileMap::Update(Vector2 player1Position, Vector2 player2Position)
 {
 	totalIce = 0;
@@ -207,10 +162,6 @@ void TileMap::Update(Vector2 player1Position, Vector2 player2Position)
 		{
 			TileList.at(i).SetTileType(Fire, fire);
 		}
-		//else {
-
-		//	TileList.at(i).SetTileType(Fire);
-		//}
-		//
+	
 	}
 }

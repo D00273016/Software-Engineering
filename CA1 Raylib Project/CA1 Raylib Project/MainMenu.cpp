@@ -1,25 +1,35 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu() {
-
+MainMenu::MainMenu(Font iceFont,StartButton startButton)
+	:Menu(iceFont), startButton(startButton)
+{
+	
 
 }
 
-//:: Scope resolution operator meaning this fn it belongs to this class
 void MainMenu::Draw()
 {
 	ClearBackground(RAYWHITE);
 
-	DrawText("Hello Welcome to Floor is lava", 200, 100, 20, BLACK);
-	DrawText("The aim of the game is put out lava by moving the character.", 100, 150, 20, BLACK);
-	DrawText("Please select the difficulty level .", 200, 200, 20, BLACK);
-	DrawText("Press the Button to Start", 250, 250, 20, BLUE);
+	DrawTextEx(iceFont, "Hello Welcome to Ice vs Lava.", Vector2{(float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2 - 200 }, iceFont.baseSize,2, BLACK);
+	DrawTextEx(iceFont, "This is a 2 player game, winner is who collects more tiles.", Vector2{ (float)GetScreenWidth() / 2 - 300, (float)GetScreenHeight() / 2 - 150 }, iceFont.baseSize, 2, BLACK);
+	DrawTextEx(iceFont, "Player 1 use arrow keys, Player 2 controller.", Vector2{ (float)GetScreenWidth() / 2 - 250, (float)GetScreenHeight() / 2 - 100 }, iceFont.baseSize, 2, BLACK);
+	DrawTextEx(iceFont, "Press the button to start.", Vector2{ (float)GetScreenWidth() / 2 - 130, (float)GetScreenHeight() / 2 - 50 }, iceFont.baseSize, 2, BLACK);
 
 	//allows to draw texture and scale it.
-	DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
+	DrawTextureEx(startButton.playButton, startButton.buttonPosition, startButton.buttonRotation, startButton.buttonScale, startButton.buttonColor);
 }
 
-void MainMenu::Update()
+//Check if for mouse click on play button
+bool MainMenu::StartGame(Vector2 mousePosition, Rectangle buttonBounds)
 {
+	if (CheckCollisionPointRec(mousePosition, buttonBounds))
+	{
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			return true;
+		}
+	}
 
+	return false;
 }

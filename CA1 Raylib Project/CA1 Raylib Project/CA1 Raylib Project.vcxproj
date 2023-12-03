@@ -131,8 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
@@ -145,18 +148,6 @@
     <Image Include="Resources\castleWindow.png" />
     <Image Include="Resources\Fire_Golem_Run.png" />
     <Image Include="Resources\Ice_Golem_Run.png" />
-    <Image Include="Resources\Ice_Golem_Running_000.png" />
-    <Image Include="Resources\Ice_Golem_Running_001.png" />
-    <Image Include="Resources\Ice_Golem_Running_002.png" />
-    <Image Include="Resources\Ice_Golem_Running_003.png" />
-    <Image Include="Resources\Ice_Golem_Running_004.png" />
-    <Image Include="Resources\Ice_Golem_Running_005.png" />
-    <Image Include="Resources\Ice_Golem_Running_006.png" />
-    <Image Include="Resources\Ice_Golem_Running_007.png" />
-    <Image Include="Resources\Ice_Golem_Running_008.png" />
-    <Image Include="Resources\Ice_Golem_Running_009.png" />
-    <Image Include="Resources\Ice_Golem_Running_010.png" />
-    <Image Include="Resources\Ice_Golem_Running_011.png" />
     <Image Include="Resources\Play_button.png" />
     <Image Include="Resources\tileGrass.png" />
     <Image Include="Resources\tileGrass_bottom.png" />
@@ -168,13 +159,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="GameMenu.h" />
+    <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\TileConfigMap.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Joy.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

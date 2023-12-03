@@ -7,33 +7,34 @@ Character::Character(Vector2 position, float size, char* textureFile,int playerN
 {
 	texture = LoadTexture(textureFile); // Load button texture
 	speed = 300.0f;
-	//Resizing the texture works when set here rather than calculations in the source rec.
+	//Resizing the texture
 	texture.width = texture.width * size;
 	texture.height = texture.height * size;
+	// 12 here = number of frames in sprite sheet
 	sourceRec = { position.x, position.y, (float)(texture.width) / 12   , (float)texture.height };
-	// to get the middle of the feet it has a the collision check for chaning tiles. 
-	// Issues with texture height size due to spacing in the png resulted in 1.18f figure for height. 
+	// for collision check I wanted to used the middle of the feet.
+	// To do so I needed to move from the top left to be centre and bottom.
+	// Issues with texture height size were due to spacing in the png resulted in 1.18f figure for height. 
 	// Offset = 12 frames / 2 to get the middle of the character frame
 	offset = { (texture.width) / 24.0f, (texture.height) / 1.18f };
 	
-	
+	// Animation code reference was sourced from lecture no. 5/6
 	frame = 0;
 	updateTime = 1.0 / 12.0;
 	runningTime = 0.0;
 	
 }
 
-//Code sourced from class 6
+
 void Character::Draw() 
 {
-	//For now making the character a movign rectangle
-    //DrawTextureEx(texture, position,0,size,WHITE);
+	//Drawing the character
 	DrawTextureRec(texture, sourceRec, position, WHITE);
 
-	// To visualise collision position the circle is drawn
-	DrawCircle(positionFeet.x, positionFeet.y, 3, PINK);
+	// Test to visualise collision position the circle is drawn
+	//DrawCircle(positionFeet.x, positionFeet.y, 3, PINK);
 }
-
+// Animation function to reduce code repetition
 void Character::Animate() {
 
 	runningTime += deltatime;
@@ -69,7 +70,8 @@ void Character::Update()
 	positionFeet.x = position.x + offset.x;
 	positionFeet.y = position.y + offset.y;
 
-	// Adding if player 1 inputs keyboard / controller
+	// Adding if player 1 inputs keyboard / player 2 controller
+	// Moving the character
 	if (playerNumber == 1) 
 	{
 
@@ -133,16 +135,14 @@ void Character::Update()
 		}
 	}
 
-
 	
-	
+	// Harcoded bounds due to time constaraints
+	// This ensures the character within the hardcoded bounds of the screen
 
-	// This ensures the character within the screen frame on the Y axis
-	// if Top left position is negative it sets it to 0
-	if (position.y < 0) position.y = 0;
+	if (position.y < 6.5) position.y = 6.5;
 	// if Bottom left position is over the screen you take the character position - the height of the character
-	if (position.y > GetScreenHeight() - (texture.height * size)) position.y = GetScreenHeight() - (texture.height * size);
+	if (position.y > GetScreenHeight() - 150) position.y = GetScreenHeight() - 150;
 	// This ensures the character within the screen frame on the X axis. Same logic applies as for Y axis but on X axis and using widht
-	if (position.x < 0) position.x = 0; 
-	if (position.x > GetScreenWidth() - (texture.width / 2 * size)) position.x = GetScreenWidth() - (texture.width / 2 * size);
+	if (position.x < 100) position.x = 100;
+	if (position.x > GetScreenWidth() - 180) position.x = GetScreenWidth() - 180;
 };

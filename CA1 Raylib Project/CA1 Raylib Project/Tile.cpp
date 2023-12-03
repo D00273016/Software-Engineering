@@ -5,6 +5,7 @@
 Tile::Tile(Vector2 position, Vector2 size, TileType tileType, Texture2D texture)
 	  :position(position), size(size)
 {
+	// Sets the tile type and texture depending on the tile map
 	SetTileType(tileType, texture);
 }
 
@@ -21,8 +22,6 @@ void Tile::SetTileType(TileType type,Texture2D tileTexture)
 	tileType = type;
 	texture = tileTexture;
 }
-
-// There will be more obstacles that will have to go through the loop 
 
 //previously checking for a collision between rectangles as the character was a rectangle
 //instead of using the collision of each of all sides the character point at his feet being checked with the built in function

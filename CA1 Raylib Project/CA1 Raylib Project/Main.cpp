@@ -5,32 +5,24 @@
 #include "Tile.h"
 #include "TileMap.h"
 #include "Main.h"
+#include "MainMenu.h"
+#include "GameOverMenu.h"
+#include "GameMenu.h"
 
+/* Game description  
 
-//Opens a window
-//Has Sprites / 3D Models : Includes textures, shapes, shaders, 3D models
-//Capable of user input : Game controller, mouse input, keyboard input, use of camera
-//Sprites / 3D Models capable of : Movement, animation, collisions
-//Plays audio : Background audio or individual audio clips
-//Includes text : Load different fonts
-//Uses git / github source control
-//Use of header and source files
+The game opens to main menu.
+Game overview is displayed, user is asked to click the play button.
+This is a 2 player game where player one uses arrow keys and player 2 controller.
+(Tested using playstation controller) 
+The player who covers the most tiles wins.
+Game speeds up after 30 secods and ends after total of 60 seconds.
+Game over screen is displayed at the end of the game with the winner player
 
-/* Chose 1 to 2
-Power - ups or collectibles(e.g., extra lives, speed boost)
-Particle effects(e.g., when an object is hit or collected)
-Time - based events(e.g., speed up game pace every 30 seconds)
-Enemy AI(e.g., objects that follow or avoid the player)
-Different control schemes(e.g., switching between keyboard and mouse controls)
-Custom features of your own choosing at an appropriate level of advancement :
-Hint: Look to the examples https ://www.raylib.com/examples.html
-
-
-
-
-#define NUM_FRAMES  3  
+Initial tile map concept reference https://www.youtube.com/watch?v=DqKrZ7Zffxw
 */
 
+//Screen type
 enum Screen
 {
 	Menu,
@@ -40,154 +32,137 @@ enum Screen
 
 int main() {
 
-	//Set the width and the height, and title  of the screen 
+	//Sets the width and the height, and title  of the screen 
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
 	const char* title = "Floor is lava";
 
-	// Setting game time
-	float gameTime = 60;
+	//Speed increase boolean, allowed once
+	bool increaseSpeed = true;
+
+	// Setting game time remaining, 1 second longer than time as it reduces before drawing
+	float gameTime = 61;
 
 	Vector2 mousePosition = { 0.0f, 0.0f };
 	Screen currentScreen = Menu;
 
-	//Raylib build in function to initialise window by passing in variable
+	//Raylib built in function to initialise window by passing in variable
 	InitWindow(screenWidth, screenHeight, title);
 
 	//Setting how many times the screen refreshes per second
 	SetTargetFPS(60);
-
-	Texture2D playButton = LoadTexture("resources/Play_button.png"); // Load button texture
-
-	//Texture2D characterTexture = LoadTexture("Resources/Denis.png");
-	Vector2 buttonPosition = { (float)screenWidth / 2,(float)screenHeight / 2 };
-	float buttonRotation = 0.00;
-	float buttonScale = { 2.0f };
-	Color buttonColor = SKYBLUE;
-
-	//Creating instance of the character
-	Character player1(Vector2{0,0}, 0.1, (char*)"Resources/Ice_Golem_Run.png",1);  //This is the character 1
-	Character player2(Vector2{0,0}, 0.1, (char*)"Resources/Fire_Golem_Run.png",2); //This is the character 2
 	
+	// Load button texture reference https://kenney.nl/assets/ui-pack
+	Texture2D playButton = LoadTexture("resources/Play_button.png"); 
+	
+	//Font references https://www.1001fonts.com/search.html?search=fire&page=2 https://www.1001fonts.com/search.html?search=ice
+	Font iceFont = LoadFontEx("resources/Snowy Season.ttf", 32, 0, 250);
+	Font fireFont = LoadFontEx("resources/Fire.ttf", 32, 0, 250);
+	
+	//Struct to access start button
+	MainMenu::StartButton startButton{};
+	startButton.playButton = playButton;
+	startButton.buttonPosition = { (float)screenWidth / 2,(float)screenHeight / 2 };
+	startButton.buttonRotation = 0.00;
+	startButton.buttonScale = { 2.0f };
+	startButton.buttonColor = SKYBLUE;
+
+	//Settting up audio from reference code https://www.raylib.com/examples/audio/loader.html?name=audio_music_stream
+	//Audio was downloaded from https://clement-panchout.itch.io/yet-another-free-music-pack?download#google_vignette 'Life is full of Joy'
+	InitAudioDevice();
+	Music music = LoadMusicStream("resources/Joy.wav");
+	PlayMusicStream(music);
+
+	//Creating instance of the players referenced from https://craftpix.net/freebies/free-golems-chibi-2d-game-sprites/?num=1&count=9&sq=golem&pos=3
+	Character player1(Vector2{ screenWidth / 2 ,screenHeight / 2 }, 0.1, (char*)"Resources/Ice_Golem_Run.png", 1);  //This is the character 1
+	Character player2(Vector2{screenWidth / 2-10, screenHeight / 2-6}, 0.1, (char*)"Resources/Fire_Golem_Run.png",2); //This is the character 2
+
 	TileMap tileMap{};
 
-	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
-	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
+	// Setting the play button bounds 
+	Rectangle buttonBounds = { startButton.buttonPosition.x, startButton.buttonPosition.y, playButton.width * startButton.buttonScale, playButton.height * startButton.buttonScale };
+	
+	MainMenu mainMenu{ iceFont, startButton };
+	GameMenu gameMenu { iceFont };
+	GameOverMenu gameOverMenu { iceFont, fireFont };
+
+
+	// Game Logic
 
 	while (!WindowShouldClose()) 
 	{
-
+		UpdateMusicStream(music); 
 		mousePosition = GetMousePosition();
 
 		if (currentScreen == Menu)
 		{
-			if (CheckCollisionPointRec(mousePosition, buttonBounds))
+			if (mainMenu.StartGame(mousePosition, buttonBounds)) // Start the game if button clicked
 			{
-				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-				{
-					currentScreen = Game;
-				
-				}
+				currentScreen = Game;
 			}
 		}
 		else if (currentScreen == Game)
 		{	
-			// Moves the player for now
+			// Moves the players
 			player1.Update();
 			player2.Update();
 
-			tileMap.Update(player1.positionFeet,player2.positionFeet);
+			tileMap.Update(player1.positionFeet,player2.positionFeet); // Checks for collisions between tiles and the player
 
 			// Reducing the time of the game by 1 second (to match the frame time)
 			gameTime -= 1 * GetFrameTime();
+			
 
+			if (increaseSpeed == true) {
+				// time event less than 30 seconds increases players speed  
+				if (gameTime <= 30) {
+
+					player1.speed *= 1.5f;
+					player2.speed *= 1.5f;
+
+					increaseSpeed = false;
+				}
+			}
 			if (gameTime <= 0)
 			{
 				currentScreen = GameOver;
 			}
 			
 		}
-		else
-		{
 
-		}
-
-
-		// Draw ----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		//Testing the button press action ideally this should be in another fuction
-
+		// Checks for current screen and draws the object depending on what screen
 		if (currentScreen == Menu) 
 		{
-			
 			ClearBackground(RAYWHITE);
 
-			//Adds Instructions text to scrren
-			DrawText("Hello Welcome to Floor is lava", screenWidth/2-100, screenHeight/2-300, 20, BLACK);
-			DrawText("The aim of the game is put out lava by moving the character.",  screenWidth/2+50, screenHeight/2+50, 20, BLACK);
-			DrawText("Please select the difficulty level .", screenWidth / 2 + 100, screenHeight / 2 + 100, 20, BLACK);
-			DrawText("Press the Button to Start", screenWidth / 2 + 150, screenHeight / 2 + 150, 20, BLUE);
-
-			//allows to draw texture and scale it.
-			DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
-		
+			mainMenu.Draw();	
 		}
 		else if (currentScreen == Game)
 		{
 			ClearBackground(RAYWHITE);
+	
 			//Order matters determines what object is on top
 			tileMap.Draw();
 			player1.Draw();
 			player2.Draw();
 
-			DrawText(TextFormat("Player 1: %02i ", tileMap.totalIce), 20, 20, 40, BLACK);
-			DrawText(TextFormat("Time Remaining: %02i ", (int)gameTime), (screenWidth/2)-200, 20, 40, BLACK);
-			DrawText(TextFormat("Player 2: %02i ", tileMap.totalFire), screenWidth-270, 20, 40, BLACK);
-
+			gameMenu.Draw(tileMap.totalIce, tileMap.totalFire, gameTime); //Displays game UI, players scores and time remaining
 		}
 		else 
 		{
 			ClearBackground(RAYWHITE);
-			
-			//Condition to check who won
 
-			if (tileMap.totalIce > tileMap.totalFire)
-			{
-				DrawText("Game Over, Player 1 Wins", screenWidth / 2, screenHeight / 2, 20, BLACK);
-			}
-			else if(tileMap.totalFire > tileMap.totalIce)
-			{
-				DrawText("Game Over, Player 2 Wins", screenWidth / 2, screenHeight / 2, 20, BLACK);
-			}
-			else
-			{
-				DrawText("Game Over, Draw!", screenWidth / 2, screenHeight / 2, 20, BLACK);
-			}
-
+			gameOverMenu.Draw(tileMap.totalIce, tileMap.totalFire); //Displays winner in fire/ ice font
 		}
 
 		EndDrawing();
-		 //-------------------------------------------------------------------------------------
+		
 	};
-			
+	UnloadMusicStream(music);   // Unload music stream buffers from RAM
+	CloseAudioDevice();         // Close audio device (music streaming is automatically stopped)
 	CloseWindow();
 	return 0;
 	
 };
-
-// Menu Screen
-//  List of potential classes
-// Game Class - Main logic 
-// Map Class - Tile map
-// Tile Object Class
-// Character Class - Mr Snow
-// Enemy Class - Inherits character? since it will have alot of the same atributes 
-// Player Class inherits the character? Same applies
-// Bonus collectable class
-// SceneManagement of the game background, audio text, transition between scenes.
-// References 
-// For concept https://www.youtube.com/watch?v=DqKrZ7Zffxw
-
-
-//For audio https://www.raylib.com/examples/audio/loader.html?name=audio_music_stream

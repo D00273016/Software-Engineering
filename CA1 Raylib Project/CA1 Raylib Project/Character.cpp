@@ -13,14 +13,14 @@ Character::Character(Vector2 position, float size, char* textureFile)
 	sourceRec = { position.x, position.y, (float)(texture.width) / 12   , (float)texture.height };
 	// to get the middle of the feet it has a the collision check for chaning tiles. 
 	// Issues with texture height size due to spacing in the png resulted in 1.18f figure for height. 
-	// The 
+	// Offset = 12 frames / 2 to get the middle of the character frame
 	offset = { (texture.width) / 24.0f, (texture.height) / 1.18f };
-	/*
+	
+	
 	frame = 0;
 	updateTime = 1.0 / 12.0;
 	runningTime = 0.0;
-
-	*/
+	
 }
 
 //Code sourced from class 6
@@ -41,14 +41,34 @@ void Character::Update() {
 	//by adding the calculated x offset (scaled char width / 2 to get the centre point), the same logic applies for y but vertical.
 
 	// Sets up time in between each frame
-		
+	deltatime = GetFrameTime();
+
 	positionFeet.x = position.x + offset.x;
 	positionFeet.y = position.y + offset.y;
 
 	if (IsKeyDown(KEY_UP))
 	{
-		position.y -= speed;
+		position.y -= speed * deltatime;
+		runningTime += deltatime;
+		
+		if (runningTime >= updateTime) {
 			
+			runningTime = 0.0;
+			sourceRec.x = frame * sourceRec.width;
+			frame++;
+			
+			if (frame > 11) {
+				frame = 0;
+			}
+		}
+
+			
+	}
+	if (IsKeyReleased(KEY_UP)) {
+
+		frame = 0;
+		sourceRec.x = frame * sourceRec.width;
+
 	}
 	if (IsKeyDown(KEY_DOWN))
 	{

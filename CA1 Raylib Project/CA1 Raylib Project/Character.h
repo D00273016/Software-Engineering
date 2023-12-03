@@ -13,15 +13,15 @@ public:
 	Rectangle sourceRec;
 	float speed;
 	float size;
-
-	/*
+	float deltatime;
+	
 	//I NEED TO MOVE THIS INTO A STRUCt
-    Rectangle animRec;
-    Vector2 position;  
-    int frame;         //current frame rate
-    float updateTime;  //calls through diff frames
-    float runningTime; //how much time was used since the last frame
-	*/
+	/*
+	Rectangle animRec;
+	Vector2 animposition;*/
+	int frame;         //current frame rate
+	float updateTime;  //calls through diff frames
+	float runningTime; //how much time was used since the last frame
 
 
 private:

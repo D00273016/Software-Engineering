@@ -62,10 +62,10 @@ int main() {
 	Color buttonColor = SKYBLUE;
 
 	//Creating instance of the character
-	Character player(Vector2{0,0}, 0.1, (char*)"Resources/Ice_Golem_Run.png"); //This is the character
+	Character player1(Vector2{0,0}, 0.1, (char*)"Resources/Ice_Golem_Run.png",1);  //This is the character 1
+	Character player2(Vector2{0,0}, 0.1, (char*)"Resources/Fire_Golem_Run.png",2); //This is the character 2
 	
 	TileMap tileMap{};
-
 
 	// First you take the top left position X, then y then it if the scale was not multiplied it the selection would not cover the exact button 
 	Rectangle buttonBounds = { buttonPosition.x, buttonPosition.y, playButton.width * buttonScale, playButton.height * buttonScale };
@@ -88,9 +88,10 @@ int main() {
 		else
 		{	
 			// Moves the player for now
-			player.Update();
+			player1.Update();
+			player2.Update();
 
-			tileMap.Update(player);
+			tileMap.Update(player1);
 
 
 			//The next move is to check if there is a collition between a tile and a charter and if that returns true set the tile function is called.
@@ -133,7 +134,9 @@ int main() {
 			ClearBackground(RAYWHITE);
 			//Order matters determines what object is on top
 			tileMap.Draw();
-			player.Draw();
+			player1.Draw();
+			player2.Draw();
+
 		}
 
 

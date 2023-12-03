@@ -14,7 +14,7 @@ public:
 	float speed;
 	float size;
 	float deltatime;
-	
+	int playerNumber;
 	//I NEED TO MOVE THIS INTO A STRUCt
 	/*
 	Rectangle animRec;
@@ -29,11 +29,14 @@ private:
 	Texture2D texture;
 
 public:
-
-	Character(Vector2 position, float size, char* textureFile);
+	// adding player number for multiple players
+	Character(Vector2 position, float size, char* textureFile,int playerNumber);
 	
 	//Code sourced from class 6
 	void Draw();
+
+	void Animate();
+	void StopAnimation();
 
 	void Update();
 	

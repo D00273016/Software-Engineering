@@ -2,8 +2,8 @@
 #include "TileMap.h"
 	
 
-Character::Character(Vector2 position, float size, char* textureFile)
-	:position(position), size(size)
+Character::Character(Vector2 position, float size, char* textureFile,int playerNumber)
+	:position(position), size(size), playerNumber(playerNumber)
 {
 	texture = LoadTexture(textureFile); // Load button texture
 	speed = 300.0f;
@@ -32,11 +32,32 @@ void Character::Draw()
 
 	// To visualise collision position the circle is drawn
 	DrawCircle(positionFeet.x, positionFeet.y, 3, PINK);
-
 }
 
+void Character::Animate() {
 
-void Character::Update() 
+	runningTime += deltatime;
+
+	if (runningTime >= updateTime)
+	{
+		runningTime = 0.0;
+		sourceRec.x = frame * sourceRec.width;
+		frame++;
+
+		if (frame > 11)
+		{
+			frame = 0;
+		}
+	}
+}
+
+void Character::StopAnimation() {
+
+	frame = 0;
+	sourceRec.x = frame * sourceRec.width;
+}
+
+void Character::Update()
 {
 
 	//The feet positions are calculated by top left hand side char position
@@ -48,103 +69,73 @@ void Character::Update()
 	positionFeet.x = position.x + offset.x;
 	positionFeet.y = position.y + offset.y;
 
-	if (IsKeyDown(KEY_UP))
+	// Adding if player 1 inputs keyboard / controller
+	if (playerNumber == 1) 
 	{
-		position.y -= speed * deltatime;
-		runningTime += deltatime;
+
+		if (IsKeyDown(KEY_UP))
+		{
+			position.y -= speed * deltatime;
+			Animate();
+		}
+		if (IsKeyReleased(KEY_UP))
+		{
+			StopAnimation();
+		}
+		if (IsKeyDown(KEY_DOWN))
+		{
+			position.y += speed * deltatime;
+			Animate();
+		}
+		if (IsKeyReleased(KEY_DOWN))
+		{
+			StopAnimation();
+		}
+		if (IsKeyDown(KEY_LEFT))
+		{
+			position.x -= speed * deltatime;
+			Animate();
+		}
+		if (IsKeyReleased(KEY_LEFT))
+		{
+			StopAnimation();;
+		}
+		if (IsKeyDown(KEY_RIGHT))
+		{
+			position.x += speed * deltatime;
+			Animate();
+		}
+		if (IsKeyReleased(KEY_RIGHT))
+		{
+			StopAnimation();
+		}
+
+	}
+	else if (playerNumber == 2)
+	{
+		int gamepad = 0; // which gamepad, reference code: https://www.raylib.com/examples/core/loader.html?name=core_input_gamepad
 		
-		if (runningTime >= updateTime) 
+		if (IsGamepadAvailable(gamepad))
 		{
-			runningTime = 0.0;
-			sourceRec.x = frame * sourceRec.width;
-			frame++;
-
-			if (frame > 11) 
+			if (GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_X) != 0 || GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_Y) != 0)
 			{
-				frame = 0;
+				position.x += (GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_X) * speed * deltatime);
+
+				position.y += (GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_Y) * speed * deltatime);
+
+				Animate();
 			}
-		}	
-	}
-	if (IsKeyReleased(KEY_UP)) 
-	{
-		frame = 0;
-		sourceRec.x = frame * sourceRec.width;
-	}
-	if (IsKeyDown(KEY_DOWN))
-	{
-		position.y += speed * deltatime;
-		runningTime += deltatime;
-
-		if (runningTime >= updateTime) 
-		{
-			runningTime = 0.0;
-			sourceRec.x = frame * sourceRec.width;
-			frame++;
-
-			if (frame > 11) 
+			else
 			{
-				frame = 0;
+				StopAnimation();
 			}
+			// raylib game input example
 		}
 	}
-	if (IsKeyReleased(KEY_DOWN)) 
-	{
-		frame = 0;
-		sourceRec.x = frame * sourceRec.width;
-	}
-	if (IsKeyDown(KEY_LEFT))
-	{
-		position.x -= speed * deltatime;
-		runningTime += deltatime;
 
-		if (runningTime >= updateTime)
-		{
-			runningTime = 0.0;
-			sourceRec.x = frame * sourceRec.width;
-			frame++;
 
-			if (frame > 11)
-			{
-				frame = 0;
-			}
-		}
-	}
-	if (IsKeyReleased(KEY_LEFT))
-	{
-		frame = 0;
-		sourceRec.x = frame * sourceRec.width;
-	}
-	if (IsKeyDown(KEY_RIGHT))
-	{
-		position.x += speed * deltatime;
-		runningTime += deltatime;
-
-		if (runningTime >= updateTime)
-		{
-			runningTime = 0.0;
-			sourceRec.x = frame * sourceRec.width;
-			frame++;
-
-			if (frame > 11)
-			{
-				frame = 0;
-			}
-		}
-	}
-	if (IsKeyReleased(KEY_RIGHT))
-	{
-		frame = 0;
-		sourceRec.x = frame * sourceRec.width;
-	}
-
-	int gamepad = 0; // which gamepad, reference code: https://www.raylib.com/examples/core/loader.html?name=core_input_gamepad
-
-	if (IsGamepadAvailable(gamepad))
-	{
-		// raylib game input example
-		position.x += (GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_X) * speed);
-		position.y += (GetGamepadAxisMovement(gamepad, GAMEPAD_AXIS_LEFT_Y) * speed);
-	}
+	
+	
 
 	// This ensures the character within the screen frame on the Y axis
 	// if Top left position is negative it sets it to 0

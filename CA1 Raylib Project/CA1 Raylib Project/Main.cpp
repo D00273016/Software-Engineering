@@ -34,7 +34,8 @@ Hint: Look to the examples https ://www.raylib.com/examples.html
 enum Screen
 {
 	Menu,
-	Game
+	Game,
+	GameOver
 };
 
 int main() {
@@ -43,6 +44,9 @@ int main() {
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
 	const char* title = "Floor is lava";
+
+	// Setting game time
+	float gameTime = 60;
 
 	Vector2 mousePosition = { 0.0f, 0.0f };
 	Screen currentScreen = Menu;
@@ -82,10 +86,11 @@ int main() {
 				if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 				{
 					currentScreen = Game;
+				
 				}
 			}
 		}
-		else
+		else if (currentScreen == Game)
 		{	
 			// Moves the player for now
 			player1.Update();
@@ -93,19 +98,18 @@ int main() {
 
 			tileMap.Update(player1.positionFeet,player2.positionFeet);
 
+			// Reducing the time of the game by 1 second (to match the frame time)
+			gameTime -= 1 * GetFrameTime();
 
-			//The next move is to check if there is a collition between a tile and a charter and if that returns true set the tile function is called.
-
-			//if (tile.CheckForCollision(player.position, player.size)) {
-			//
-			//	tile.SetTileType(Ice);
-			//
-			//}
-			//else // created for test but should include enemy position check collision to turn orange.
-			//{
-			//	tile.SetTileType(Fire);
-			//}
+			if (gameTime <= 0)
+			{
+				currentScreen = GameOver;
+			}
 			
+		}
+		else
+		{
+
 		}
 
 
@@ -129,7 +133,7 @@ int main() {
 			DrawTextureEx(playButton, buttonPosition, buttonRotation, buttonScale, buttonColor);
 		
 		}
-		else 
+		else if (currentScreen == Game)
 		{
 			ClearBackground(RAYWHITE);
 			//Order matters determines what object is on top
@@ -137,10 +141,33 @@ int main() {
 			player1.Draw();
 			player2.Draw();
 
+			DrawText(TextFormat("Player 1: %02i ", tileMap.totalIce), 20, 20, 40, BLACK);
+			DrawText(TextFormat("Time Remaining: %02i ", (int)gameTime), (screenWidth/2)-200, 20, 40, BLACK);
+			DrawText(TextFormat("Player 2: %02i ", tileMap.totalFire), screenWidth-270, 20, 40, BLACK);
+
+		}
+		else 
+		{
+			ClearBackground(RAYWHITE);
+			
+			//Condition to check who won
+
+			if (tileMap.totalIce > tileMap.totalFire)
+			{
+				DrawText("Game Over, Player 1 Wins", screenWidth / 2, screenHeight / 2, 20, BLACK);
+			}
+			else if(tileMap.totalFire > tileMap.totalIce)
+			{
+				DrawText("Game Over, Player 2 Wins", screenWidth / 2, screenHeight / 2, 20, BLACK);
+			}
+			else
+			{
+				DrawText("Game Over, Draw!", screenWidth / 2, screenHeight / 2, 20, BLACK);
+			}
+
 		}
 
-
-			EndDrawing();
+		EndDrawing();
 		 //-------------------------------------------------------------------------------------
 	};
 			
@@ -161,3 +188,6 @@ int main() {
 // SceneManagement of the game background, audio text, transition between scenes.
 // References 
 // For concept https://www.youtube.com/watch?v=DqKrZ7Zffxw
+
+
+//For audio https://www.raylib.com/examples/audio/loader.html?name=audio_music_stream
